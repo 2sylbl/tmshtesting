@@ -1,0 +1,60 @@
+---
+- name: Create empty file
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+  - name: Creating an empty file
+    file:
+     path: "./{{filename}}"
+     state: touch
+
+- name: Gather stats using tmsh command
+  hosts: f5
+  connection: local
+  gather_facts: false
+  serial: 1
+
+  tasks:
+
+  - name: Gather performance stats
+    bigip_command:
+     provider:
+      server: "{{server}}"
+      user: "{{user}}"
+      password: "{{password}}"
+      server_port: "{{server_port}}"
+      validate_certs: "{{validate_certs}}"
+     commands:
+      - show sys performance throughput historical
+      - show sys performance system historical
+    register: result
+
+  - lineinfile:
+     line: "\n###BIG-IP hostname => {{ inventory_hostname }} ###\n"
+     insertafter: EOF
+     dest: "./{{filename}}"
+
+  - lineinfile:
+     line: "{{ result.stdout_lines }}"
+     insertafter: EOF
+     dest: "./{{filename}}"
+
+  - name: Format the file
+    shell:
+     cmd: sed 's/,/\n/g' ./{{filename}} > ./{{filename}}_formatted
+
+  - pause:
+     seconds: 10
+
+- name: Delete file
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+  - name: Delete extra file created (delete file)
+    file:
+     path: ./{{filename}}
+     state: absent
