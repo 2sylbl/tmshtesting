@@ -7,7 +7,7 @@
 
   - name: Creating an empty file
     file:
-     path: "./{{filename}}"
+     path: "./output_files/{{filename}}"
      state: touch
 
 - name: Use tmsh commands
@@ -33,16 +33,16 @@
   - lineinfile:
      line: "\n###BIG-IP hostname => {{ inventory_hostname }} ###\n"
      insertafter: EOF
-     dest: "./{{filename}}"
+     dest: "./output_files/{{filename}}"
 
   - lineinfile:
      line: "{{ result.stdout_lines }}"
      insertafter: EOF
-     dest: "./{{filename}}"
+     dest: "./output_files/{{filename}}"
 
   - name: Format the file
     shell:
-     cmd: sed 's/,/\n/g' ./{{filename}} > ./{{filename}}_formatted
+     cmd: sed 's/,/\n/g' ./output_files/{{filename}} > ./output_files/{{filename}}_formatted
 
   - pause:
      seconds: 10
@@ -55,5 +55,5 @@
 
   - name: Delete extra file created (delete file)
     file:
-     path: ./{{filename}}
+     path: ./output_files/{{filename}}
      state: absent
