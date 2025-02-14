@@ -1,59 +1,67 @@
 ---
-- name: Create empty file
+- name: Ensure output directory exists and create empty file
   hosts: localhost
   gather_facts: false
 
   tasks:
+    - name: Create output_files directory if it does not exist
+      file:
+        path: "./output_files"
+        state: directory
+        mode: '0755'
 
-  - name: Creating an empty file
-    file:
-     path: "./output_files/{{filename}}"
-     state: touch
+    - name: Creating an empty file
+      file:
+        path: "./output_files/{{ filename }}"
+        state: touch
 
-- name: Use tmsh commands
+- name: Run tmsh commands
   hosts: f5
   connection: local
   gather_facts: false
   serial: 1
 
+  vars_files:
+    - "{{ command_file }}"  # This allows us to dynamically specify the command file
+
   tasks:
+    - name: Run the imported list of commands
+      bigip_command:
+        provider:
+          server: "{{ server }}"
+          user: "{{ user }}"
+          password: "{{ password }}"
+          server_port: "{{ server_port }}"
+          validate_certs: "{{ validate_certs }}"
+        commands: "{{ commandlist }}"  # Using the command list from the external file
+      register: result
 
-  - name: Run the listed tmsh commands
-    bigip_command:
-     provider:
-      server: "{{server}}"
-      user: "{{user}}"
-      password: "{{password}}"
-      server_port: "{{server_port}}"
-      validate_certs: "{{validate_certs}}"
-     commands:
-      - create ltm node 10.10.100.60
-    register: result
+    - name: Add hostname to output file
+      lineinfile:
+        line: "\n###BIG-IP hostname => {{ inventory_hostname }} ###\n"
+        insertafter: EOF
+        dest: "./output_files/{{ filename }}"
 
-  - lineinfile:
-     line: "\n###BIG-IP hostname => {{ inventory_hostname }} ###\n"
-     insertafter: EOF
-     dest: "./output_files/{{filename}}"
+    - name: Add command output to file
+      lineinfile:
+        line: "{{ item }}"
+        insertafter: EOF
+        dest: "./output_files/{{ filename }}"
+      loop: "{{ result.stdout_lines }}"
 
-  - lineinfile:
-     line: "{{ result.stdout_lines }}"
-     insertafter: EOF
-     dest: "./output_files/{{filename}}"
+    - name: Format the file
+      shell:
+        cmd: sed 's/,/\n/g' ./output_files/{{ filename }} > ./output_files/{{ filename }}_formatted
 
-  - name: Format the file
-    shell:
-     cmd: sed 's/,/\n/g' ./output_files/{{filename}} > ./output_files/{{filename}}_formatted
-
-  - pause:
-     seconds: 10
+    - pause:
+        seconds: 10
 
 - name: Delete file
   hosts: localhost
   gather_facts: false
 
   tasks:
-
-  - name: Delete extra file created (delete file)
-    file:
-     path: ./output_files/{{filename}}
-     state: absent
+    - name: Delete extra file created (delete file)
+      file:
+        path: ./output_files/{{ filename }}
+        state: absent

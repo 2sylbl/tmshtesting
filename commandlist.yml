@@ -1,0 +1,4 @@
+commandlist:
+ - create ltm node 10.10.100.60
+ - create ltm node 10.10.100.70
+ - create ltm node 10.10.100.80
