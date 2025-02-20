@@ -1,0 +1,9 @@
+commandlist:
+ - create sys crypto key test_ssl_key size 2048
+ - create sys crypto cert test_ssl_cert common-name f5demo.com key test_ssl_key subject-alternative-name "DNS:f5demo.com"
+ - create ltm profile client-ssl test_client_ssl_profile cert test_ssl_cert key test_ssl_key
+ - modify ltm profile client-ssl test_client_ssl_profile ciphers "DEFAULT:!TLSv1"
+ - create ltm pool clientssl_testpool monitor http members add { 10.1.20.100:80 10.1.20.101:80 }
+ - create ltm virtual test_clientssl_vs1 destination 10.1.10.152:443 ip-protocol tcp pool clientssl_testpool profiles add { http tcp oneconnect test_client_ssl_profile } snat automap
+ - list ltm virtual test_clientssl_vs1
+ - save sys config
