@@ -5,5 +5,7 @@ commandlist:
  - modify ltm profile client-ssl test_client_ssl_profile ciphers "DEFAULT:!TLSv1"
  - create ltm pool clientssl_testpool monitor http members add { 10.1.20.100:80 10.1.20.101:80 }
  - create ltm virtual test_clientssl_vs1 destination 10.1.10.152:443 ip-protocol tcp pool clientssl_testpool profiles add { http tcp oneconnect test_client_ssl_profile } snat automap
+ - create ltm persistence cookie test_cookie_persist cookie-name testing123
+ - modify ltm virtual test_clientssl_vs1 persist replace-all-with { test_cookie_persist }
  - list ltm virtual test_clientssl_vs1
  - save sys config
