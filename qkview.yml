@@ -1,2 +1,2 @@
 commandlist: 
- - run util qkview exclude-key file my_custom_qkview.qkview
+ - run util qkview exclude-key
