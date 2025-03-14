@@ -1,9 +1,43 @@
 ---
-- name: Ensure output directory exists and create empty file
+- name: Prompt for system details and create empty file
   hosts: localhost
   gather_facts: false
+  connection: local  # Ensure local connection
+
+  vars_prompt:
+    - name: bigip_tmos_ip
+      prompt: "BIG-IP TMOS IP Address"
+      private: no
+
+    - name: bigip_tmos_password
+      prompt: "BIG-IP TMOS admin password"
+      private: yes
+
+    - name: bigip_next_ip
+      prompt: "BIG-IP Next IP Address"
+      private: no
+
+    - name: bigip_next_password
+      prompt: "BIG-IP Next admin password"
+      private: yes
 
   tasks:
+    - name: Set fact for BIG-IP TMOS IP
+      set_fact:
+        bigip_tmos_ip: "{{ bigip_tmos_ip }}"
+
+    - name: Set fact for BIG-IP TMOS Password
+      set_fact:
+        bigip_tmos_password: "{{ bigip_tmos_password }}"
+
+    - name: Set fact for BIG-IP Next IP
+      set_fact:
+        bigip_next_ip: "{{ bigip_next_ip }}"
+
+    - name: Set fact for BIG-IP Next Password
+      set_fact:
+        bigip_next_password: "{{ bigip_next_password }}"
+
     - name: Create output_files directory if it does not exist
       file:
         path: "./output_files"
@@ -15,40 +49,88 @@
         path: "./output_files/{{ filename }}"
         state: touch
 
-- name: Run tmsh commands
-  hosts: f5
-  connection: local
+- name: Execute on BIG-IP TMOS
+  hosts: "{{ bigip_tmos_ip }}"  # Now using the fact for the actual IP
   gather_facts: false
+  connection: local  # Ensure the connection is local
   serial: 1
 
+  vars:
+    bigip_tmos_ip: "{{ bigip_tmos_ip }}"
+    bigip_tmos_password: "{{ bigip_tmos_password }}"
+
   vars_files:
-    - "{{ command_file }}"  # This allows us to dynamically specify the command file
+    - "{{ command_file }}"  # Load external command list
 
   tasks:
-    - name: Run the imported list of commands
+    - name: Run tmsh commands on BIG-IP TMOS
       bigip_command:
         provider:
-          server: "{{ server }}"
-          user: "{{ user }}"
-          password: "{{ password }}"
-          server_port: "{{ server_port }}"
-          validate_certs: "{{ validate_certs }}"
-        commands: "{{ commandlist }}"  # Using the command list from the external file
-      register: result
+          server: "{{ bigip_tmos_ip }}"
+          user: "admin"
+          password: "{{ bigip_tmos_password }}"
+          server_port: "443"
+          validate_certs: "no"
+        commands: "{{ commandlist }}"
+      register: result_tmos
 
-    - name: Add hostname to output file
+    - name: Add TMOS hostname to output file
       lineinfile:
-        line: "\n###BIG-IP hostname => {{ inventory_hostname }} ###\n"
+        line: "\n###BIG-IP TMOS IP => {{ bigip_tmos_ip }} ###\n"
         insertafter: EOF
         dest: "./output_files/{{ filename }}"
 
-    - name: Add command output to file
+    - name: Add TMOS command output to file
       lineinfile:
         line: "{{ item }}"
         insertafter: EOF
         dest: "./output_files/{{ filename }}"
-      loop: "{{ result.stdout_lines }}"
+      loop: "{{ result_tmos.stdout_lines }}"
 
+- name: Execute on BIG-IP Next
+  hosts: "{{ bigip_next_ip }}"  # Now using the fact for the actual IP
+  gather_facts: false
+  connection: local  # Ensure the connection is local
+  serial: 1
+
+  vars:
+    bigip_next_ip: "{{ bigip_next_ip }}"
+    bigip_next_password: "{{ bigip_next_password }}"
+
+  vars_files:
+    - "{{ command_file }}"  # Load external command list
+
+  tasks:
+    - name: Run tmsh commands on BIG-IP Next
+      bigip_command:
+        provider:
+          server: "{{ bigip_next_ip }}"
+          user: "admin"
+          password: "{{ bigip_next_password }}"
+          server_port: "443"
+          validate_certs: "no"
+        commands: "{{ commandlist }}"
+      register: result_next
+
+    - name: Add BIG-IP Next hostname to output file
+      lineinfile:
+        line: "\n###BIG-IP Next IP => {{ bigip_next_ip }} ###\n"
+        insertafter: EOF
+        dest: "./output_files/{{ filename }}"
+
+    - name: Add BIG-IP Next command output to file
+      lineinfile:
+        line: "{{ item }}"
+        insertafter: EOF
+        dest: "./output_files/{{ filename }}"
+      loop: "{{ result_next.stdout_lines }}"
+
+- name: Format the file
+  hosts: localhost
+  gather_facts: false
+  connection: local  # Ensure the connection is local
+
+  tasks:
     - name: Format the file
       shell:
         cmd: sed 's/,/\n/g' ./output_files/{{ filename }} > ./output_files/{{ filename }}_formatted
@@ -59,6 +141,7 @@
 - name: Delete file
   hosts: localhost
   gather_facts: false
+  connection: local  # Ensure the connection is local
 
   tasks:
     - name: Delete extra file created (delete file)

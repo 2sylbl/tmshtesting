@@ -1,0 +1,23 @@
+commandlist:
+ - create ltm monitor http auto_http_monitor send "GET /index.html \r\n" recv "Alive" interval 10 timeout 31
+ - modify ltm monitor http auto_http_monitor send "GET /index2.html \r\n"
+ - create ltm monitor ftp auto_ftp_monitor interval 10 timeout 31
+ - create ltm monitor https auto_https_monitor send "GET /index.html \r\n" recv "Alive" interval 10 timeout 31
+ - create ltm monitor gateway-icmp auto_icmp_monitor interval 10 timeout 31
+ - create ltm monitor tcp auto_tcp_monitor recv "Alive" interval 10 timeout 31
+ - create ltm monitor dns auto_dns_monitor qname "www.example.com" interval 10 timeout 31
+ - create ltm monitor radius auto_radius_monitor username admin password admin interval 10 timeout 31
+# - create ltm monitor external auto_external_monitor run "/path/to/script" interval 10 timeout 31
+ - create ltm monitor mysql auto_mysql_monitor username admin password admin database test interval 10 timeout 31
+ - create ltm monitor snmp-dca auto_snmp_monitor interval 10 timeout 31
+ - create ltm monitor smb auto_smb_monitor interval 10 timeout 31
+ - create ltm monitor postgres auto_postgres_monitor username admin password admin database test interval 10 timeout 31
+ - create ltm monitor tcp-half-open auto_tcp_half_open_monitor interval 10 timeout 31
+ - create ltm monitor ldap auto_ldap_monitor username admin password admin interval 10 timeout 31
+ - create ltm monitor smtp auto_smtp_monitor domain "example.com" interval 10 timeout 31
+ - create ltm monitor sip auto_sip_monitor request "OPTIONS sip:user@domain.com SIP/2.0\r\n" mode udp interval 10 timeout 31
+ - create ltm monitor udp auto_udp_monitor recv "Alive" interval 10 timeout 31
+ - create ltm monitor imap auto_imap_monitor username admin password admin interval 10 timeout 31
+ - create ltm monitor pop3 auto_pop3_monitor username admin password admin interval 10 timeout 31
+ - create ltm monitor radius-accounting auto_radius_accounting_monitor username "admin" nas-ip-address "192.168.1.1" secret "MySecureKey123" interval 10 timeout 31
+ - list ltm monitor

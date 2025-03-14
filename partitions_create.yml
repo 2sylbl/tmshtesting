@@ -1,0 +1,22 @@
+commandlist:
+ # Create Partitions
+ - create auth partition Sales
+ - create auth partition Marketing
+ # Create HTTP Pool in Sales Partition
+ - create ltm pool /Sales/sales_pool monitor /Common/http members add { 192.168.20.1:80 192.168.20.2:80 }
+ # Create HTTP Virtual Server in Sales Partition
+ - create ltm virtual /Sales/sales_http_vs destination 192.168.10.1:80 ip-protocol tcp pool /Sales/sales_pool profiles add { /Common/http }
+ # Create HTTPS Pool in Marketing Partition
+ - create ltm pool /Marketing/marketing_pool monitor /Common/http members add { 192.168.20.3:80 192.168.20.4:80 }
+ # Create Self-Signed Certificate in Marketing Partition
+ - create sys crypto key /Marketing/marketing_ssl_key key-size 2048
+ - create sys crypto cert /Marketing/marketing_ssl_cert common-name "marketing.example.com" key /Marketing/marketing_ssl_key subject-alternative-name "DNS:marketing.example.com"
+ # Create Client-Side SSL Profile with Self-Signed Certificate in Marketing Partition
+ - create ltm profile client-ssl /Marketing/marketing_client_ssl_profile cert /Marketing/marketing_ssl_cert key /Marketing/marketing_ssl_key
+ # Create HTTPS Virtual Server in Marketing Partition
+ - create ltm virtual /Marketing/marketing_https_vs destination 192.168.10.2:443 ip-protocol tcp pool /Marketing/marketing_pool profiles add { /Marketing/marketing_client_ssl_profile /Common/http }
+ - list auth partition
+ - list ltm virtual /Sales/*
+ - list ltm pool /Marketing/*
+ - show ltm virtual /Sales/*
+ - show ltm pool /Marketing/*
