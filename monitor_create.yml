@@ -20,4 +20,5 @@ commandlist:
  - create ltm monitor imap auto_imap_monitor username admin password admin interval 10 timeout 31
  - create ltm monitor pop3 auto_pop3_monitor username admin password admin interval 10 timeout 31
  - create ltm monitor radius-accounting auto_radius_accounting_monitor username "admin" nas-ip-address "192.168.1.1" secret "MySecureKey123" interval 10 timeout 31
+ - save sys config
  - list ltm monitor

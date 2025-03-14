@@ -15,6 +15,7 @@ commandlist:
  - create ltm profile client-ssl /Marketing/marketing_client_ssl_profile cert /Marketing/marketing_ssl_cert key /Marketing/marketing_ssl_key
  # Create HTTPS Virtual Server in Marketing Partition
  - create ltm virtual /Marketing/marketing_https_vs destination 192.168.10.2:443 ip-protocol tcp pool /Marketing/marketing_pool profiles add { /Marketing/marketing_client_ssl_profile /Common/http }
+ - save sys config
  - list auth partition
  - list ltm virtual /Sales/*
  - list ltm pool /Marketing/*
