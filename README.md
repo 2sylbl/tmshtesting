@@ -2,6 +2,8 @@ This repository contains two methods of running tmsh commands against a remote B
 
 *Note: The user that is provided, either in the Bash script prompt, or the Ansible inventory, must have **Advanced Shell** access on the BIG-IP, because both methods use SSH to log in and run the commands.*
 
+Please edit any IP addresses in the provided use case testing files (txt or yml) before running them, so they have proper addressing for your testing location and don't duplicate any existing ones in your lab environment.
+
 **Bash Folder**
 
 bash_tmsh.sh - Bash script to run arbitrary tmsh commands on a remote host of your choosing via SSH
