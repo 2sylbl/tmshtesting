@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Check for required arguments
 if [[ $# -lt 1 ]]; then
   echo "Usage: $0 <commands_file>"
@@ -39,20 +40,20 @@ SSH_ARGS="-o StrictHostKeyChecking=no -o ConnectTimeout=$SSH_TIMEOUT -o ControlM
 
 # Catch premature script exits and ensure cleanup
 cleanup() {
-  # echo "Cleaning up temporary files and SSH control socket..." #Uncomment for debugging if needed
+  # echo "Cleaning up temporary files and SSH control socket..." # Uncomment for debugging if needed
   rm -f "$TMP_OUTPUT_FILE"  # Remove the temporary file
+
   # Terminate SSH control socket if it exists
   if [[ -S $CONTROL_PATH ]]; then
     echo "Terminating SSH control socket..."
     ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST" 2>/dev/null
-  else
-   # echo "No control socket found to clean up." #Uncomment for debugging if needed
   fi
 }
 
+# Set up trap to handle premature exits
 trap cleanup ERR INT TERM EXIT  # Perform cleanup on error, interrupt, or exit
 
-# Add hostname or a header to output file
+# Add hostname or a header to the output file
 echo -e "\n### BIG-IP hostname => $REMOTE_HOST ###\n" > "$TMP_OUTPUT_FILE"
 
 # ESTABLISH MASTER SSH CONNECTION

@@ -8,7 +8,7 @@ Please edit any IP addresses in the provided use case testing files (txt or yml)
 
 bash_tmsh.sh - Bash script to run arbitrary tmsh commands on a remote host of your choosing via SSH
 
-This bash script will take a list of tmsh commands provided in a separate text file and run them against a remote BIG-IP. (The commands in the text file should not include the *tmsh* at the beginning of each line)
+This bash script will take a list of tmsh commands provided in a separate text file and run them against a remote BIG-IP. The commands in the text file should not include the *tmsh* at the beginning of each line.
 
 *Usage:*
 ./bash_tmsh.sh commands.txt
