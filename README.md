@@ -1,3 +1,7 @@
+This repository contains two methods of running tmsh commands against a remote BIG-IP. 
+
+*Note: The user that is provided, either in the Ansible inventory, or the Bash script prompt, must have **Advanced Shell** access on the BIG-IP, because both methods use SSH to log in and run the commands.*
+
 **Ansible Folder**
 
 run_tmsh.yml - Ansible Playbook to run arbitrary tmsh commands using the bigip_command module:
@@ -16,7 +20,9 @@ ansible-playbook run_tmsh.yml -i (your inventory file) -e "filename=(your desire
 
 bash_tmsh.sh - Bash script to run arbitrary tmsh commands on a remote host of your choosing via SSH
 
-Similarly to the Ansible playbook, this bash script will take a list of tmsh commands provided in a separate text file and run them against a remote BIG-IP. 
+Similarly to the Ansible playbook, this bash script will take a list of tmsh commands provided in a separate text file and run them against a remote BIG-IP. (The commands should not include the *tmsh* at the beginning of each line)
 
 *Usage:*
 ./bash_tmsh.sh commands.txt
+
+You will be prompted for the username and IP address of the system you wish to run the commands against, and you will provide a name for the output file, which will be created in an output_files directory underneath the directory you're running the script from. 

@@ -34,22 +34,38 @@ FORMATTED_OUTPUT_FILE="${OUTPUT_DIR}/${OUTPUT_FILE}" # Final (formatted) output 
 mkdir -p "$OUTPUT_DIR"
 
 # Catch premature script exits and ensure cleanup
-trap 'echo "An error occurred. Cleaning up temporary files..."; rm -f "$TMP_OUTPUT_FILE"; exit 1' ERR INT TERM
+trap '
+  echo "An error occurred. Cleaning up temporary files and SSH control socket...";
+  rm -f "$TMP_OUTPUT_FILE";
+  [[ -S $CONTROL_PATH ]] && ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST";
+  exit 1' ERR INT TERM
 
 # Add hostname or a header to output file
 echo -e "\n### BIG-IP hostname => $REMOTE_HOST ###\n" > "$TMP_OUTPUT_FILE"
 
-# Check if SSH Key is being used
-SSH_KEY=${SSH_KEY:-"$HOME/.ssh/id_rsa"}  # Default SSH key location
-
-# SSH timeout value (in seconds)
+# SSH options for single-password prompt
 SSH_TIMEOUT=15
+CONTROL_PATH="/tmp/ssh_ctrl_%C"
+SSH_ARGS="-o StrictHostKeyChecking=no -o ConnectTimeout=$SSH_TIMEOUT -o ControlMaster=auto -o ControlPath=$CONTROL_PATH -o ControlPersist=60"
+
+# ESTABLISH MASTER SSH CONNECTION
+echo "Testing SSH connection to $REMOTE_HOST..."
+ssh $SSH_ARGS -fN "$REMOTE_USER@$REMOTE_HOST" 2>/dev/null
+if [[ $? -ne 0 ]]; then
+  echo "ERROR: Unable to connect to $REMOTE_HOST. Check the host connectivity or SSH configuration."
+  echo "[ERROR] SSH connection test failed." >> "$TMP_OUTPUT_FILE"
+  rm -f "$TMP_OUTPUT_FILE"
+  [[ -S $CONTROL_PATH ]] && ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST"
+  exit 1
+fi
+
+# SUCCESSFUL CONNECTION: Announce execution
+echo "Executing TMSH commands on BIG-IP ($REMOTE_HOST)..."
 
 # Loop through each command in the commands file and execute them remotely via SSH
-echo "Executing TMSH commands on BIG-IP ($REMOTE_HOST)..."
 while IFS= read -r command; do
   if [[ "$command" != "" ]]; then
-    OUTPUT=$(ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no -o ConnectTimeout="$SSH_TIMEOUT" "$REMOTE_USER@$REMOTE_HOST" "tmsh $command" 2>&1)
+    OUTPUT=$(ssh $SSH_ARGS "$REMOTE_USER@$REMOTE_HOST" "tmsh $command" 2>&1)
     
     # Check if the SSH command failed
     if [[ $? -ne 0 ]]; then
@@ -62,6 +78,9 @@ while IFS= read -r command; do
     echo "$OUTPUT" >> "$TMP_OUTPUT_FILE"
   fi
 done < "$COMMAND_FILE"
+
+# Cleanup SSH master session
+[[ -S $CONTROL_PATH ]] && ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST"
 
 # Format the output file (Example: Replace commas with newlines for better readability)
 echo "Formatting output file..."
