@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Check for required arguments
 if [[ $# -lt 1 ]]; then
   echo "Usage: $0 <commands_file>"
@@ -26,36 +25,40 @@ read -rp "Enter the remote host (IP/hostname): " REMOTE_HOST
 read -rp "Enter the output file name: " OUTPUT_FILE
 
 # Output file config
-OUTPUT_DIR="./output_files"                # Directory to store output files
+OUTPUT_DIR="./output_files"                  # Directory to store output files
 TMP_OUTPUT_FILE="${OUTPUT_DIR}/${OUTPUT_FILE}_temp"  # Temporary raw file
 FORMATTED_OUTPUT_FILE="${OUTPUT_DIR}/${OUTPUT_FILE}" # Final (formatted) output file
 
 # Ensure the output directory exists
 mkdir -p "$OUTPUT_DIR"
 
+# SSH options for single-password prompt, with control master for session reuse
+SSH_TIMEOUT=15
+CONTROL_PATH="/tmp/ssh_ctrl_%C"
+SSH_ARGS="-o StrictHostKeyChecking=no -o ConnectTimeout=$SSH_TIMEOUT -o ControlMaster=auto -o ControlPath=$CONTROL_PATH -o ControlPersist=5"
+
 # Catch premature script exits and ensure cleanup
-trap '
-  echo "An error occurred. Cleaning up temporary files and SSH control socket...";
-  rm -f "$TMP_OUTPUT_FILE";
-  [[ -S $CONTROL_PATH ]] && ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST";
-  exit 1' ERR INT TERM
+cleanup() {
+  # echo "Cleaning up temporary files and SSH control socket..." #Uncomment for debugging if needed
+  rm -f "$TMP_OUTPUT_FILE"  # Remove the temporary file
+  # Terminate SSH control socket if it exists
+  if [[ -S $CONTROL_PATH ]]; then
+    echo "Terminating SSH control socket..."
+    ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST" 2>/dev/null
+  else
+   # echo "No control socket found to clean up." #Uncomment for debugging if needed
+  fi
+}
+
+trap cleanup ERR INT TERM EXIT  # Perform cleanup on error, interrupt, or exit
 
 # Add hostname or a header to output file
 echo -e "\n### BIG-IP hostname => $REMOTE_HOST ###\n" > "$TMP_OUTPUT_FILE"
 
-# SSH options for single-password prompt
-SSH_TIMEOUT=15
-CONTROL_PATH="/tmp/ssh_ctrl_%C"
-SSH_ARGS="-o StrictHostKeyChecking=no -o ConnectTimeout=$SSH_TIMEOUT -o ControlMaster=auto -o ControlPath=$CONTROL_PATH -o ControlPersist=60"
-
 # ESTABLISH MASTER SSH CONNECTION
-echo "Testing SSH connection to $REMOTE_HOST..."
-ssh $SSH_ARGS -fN "$REMOTE_USER@$REMOTE_HOST" 2>/dev/null
-if [[ $? -ne 0 ]]; then
+echo "Making SSH connection to $REMOTE_HOST..."
+if ! ssh $SSH_ARGS -fN "$REMOTE_USER@$REMOTE_HOST" 2>/dev/null; then
   echo "ERROR: Unable to connect to $REMOTE_HOST. Check the host connectivity or SSH configuration."
-  echo "[ERROR] SSH connection test failed." >> "$TMP_OUTPUT_FILE"
-  rm -f "$TMP_OUTPUT_FILE"
-  [[ -S $CONTROL_PATH ]] && ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST"
   exit 1
 fi
 
@@ -66,7 +69,7 @@ echo "Executing TMSH commands on BIG-IP ($REMOTE_HOST)..."
 while IFS= read -r command; do
   if [[ "$command" != "" ]]; then
     OUTPUT=$(ssh $SSH_ARGS "$REMOTE_USER@$REMOTE_HOST" "tmsh $command" 2>&1)
-    
+
     # Check if the SSH command failed
     if [[ $? -ne 0 ]]; then
       echo "ERROR: Unable to execute command '$command' on $REMOTE_HOST. Check the host connectivity or SSH configuration."
@@ -79,16 +82,9 @@ while IFS= read -r command; do
   fi
 done < "$COMMAND_FILE"
 
-# Cleanup SSH master session
-[[ -S $CONTROL_PATH ]] && ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST"
-
 # Format the output file (Example: Replace commas with newlines for better readability)
 echo "Formatting output file..."
 sed 's/,/\n/g' "$TMP_OUTPUT_FILE" > "$FORMATTED_OUTPUT_FILE"
-
-# Clean Up: Remove temporary unformatted file
-echo "Cleaning up temporary files..."
-rm -f "$TMP_OUTPUT_FILE"
 
 # Notify user of the formatted output file location
 echo "Formatted output saved to: $FORMATTED_OUTPUT_FILE"
