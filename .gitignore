@@ -1,2 +1,5 @@
 output_files/*
 mbip-dev-inventory.yml
+ansible/mbip-dev-inventory.yml
+ansible/output_files/*
+bash/output_files/*
