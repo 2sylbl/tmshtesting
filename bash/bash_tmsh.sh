@@ -30,6 +30,27 @@ TMP_OUTPUT_FILE="${OUTPUT_DIR}/${OUTPUT_FILE}_temp"
 FORMATTED_OUTPUT_FILE="${OUTPUT_DIR}/${OUTPUT_FILE}"
 mkdir -p "$OUTPUT_DIR"
 
+# ----------------------------------
+# Check if output file already exists
+# ----------------------------------
+while [[ -f "$FORMATTED_OUTPUT_FILE" ]]; do
+  echo
+  echo "WARNING: The file '$FORMATTED_OUTPUT_FILE' already exists."
+  read -rp "Do you want to overwrite it? (yes/no): " USER_RESPONSE
+  
+  # Default to "no" if the user does not explicitly enter "yes" or "y" (case-insensitive)
+  if [[ "${USER_RESPONSE,,}" == "yes" || "${USER_RESPONSE,,}" == "y" ]]; then
+    echo
+    echo "Proceeding to overwrite '$FORMATTED_OUTPUT_FILE'..."
+    break
+  else
+    echo
+    read -rp "Enter a new filename: " OUTPUT_FILE
+    TMP_OUTPUT_FILE="${OUTPUT_DIR}/${OUTPUT_FILE}_temp"      # Update TMP file path
+    FORMATTED_OUTPUT_FILE="${OUTPUT_DIR}/${OUTPUT_FILE}"    # Update final output file path
+  fi
+done
+
 # SSH settings
 SSH_TIMEOUT=15
 CONTROL_PATH="/tmp/ssh_%C"
