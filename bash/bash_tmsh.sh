@@ -56,7 +56,6 @@ SSH_TIMEOUT=15
 CONTROL_PATH="/tmp/ssh_%C"
 SSH_ARGS="-o StrictHostKeyChecking=no -o ConnectTimeout=$SSH_TIMEOUT -o ControlMaster=auto -o ControlPath=$CONTROL_PATH -o ControlPersist=5"
 
-# Cleanup function
 cleanup() {
   rm -f "$TMP_OUTPUT_FILE"
   [ -S "$CONTROL_PATH" ] && ssh -O exit -S "$CONTROL_PATH" "$REMOTE_USER@$REMOTE_HOST" 2>/dev/null
@@ -94,18 +93,27 @@ mapfile -t commands < "$COMMAND_FILE"
 # ----------------------------------
 # Process each command
 # ----------------------------------
+execution_counter=0  # Counter for valid commands
+
 for command_idx in "${!commands[@]}"; do
   command="${commands[$command_idx]}"
 
-  # Skip empty lines
-  if [[ -z "${command// }" ]]; then
+  # Skip blank lines and lines starting with '#' (after removing leading whitespace)
+  if [[ -z "${command// }" || "${command// }" == "#"* ]]; then
     continue
   fi
 
-  echo "Executing command [$command_idx]: $command"
+  # Increment the execution counter for valid commands
+  ((execution_counter++))
 
-  # Capture the current TMP_OUTPUT_FILE state
-  PREVIOUS_CONTENTS=$(cat "$TMP_OUTPUT_FILE")
+  echo "Executing command [$execution_counter]: $command"
+
+  # Safely capture the current TMP_OUTPUT_FILE state
+  if [[ -f "$TMP_OUTPUT_FILE" ]]; then
+    PREVIOUS_CONTENTS=$(cat "$TMP_OUTPUT_FILE")
+  else
+    PREVIOUS_CONTENTS=""
+  fi
 
   # Execute command and separate stdout and stderr
   STDOUT_OUTPUT=$(ssh $SSH_ARGS "$REMOTE_USER@$REMOTE_HOST" "tmsh $command" 2>/tmp/stderr_output.tmp)

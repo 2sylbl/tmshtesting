@@ -1,0 +1,1094 @@
+[1m(B[m
+[1mHelp is available on the following topics(B[m
+[1m(B[m
+[1mGeneral:(B[m                 
+  glob                               time
+  grep                               tmsh
+  regex                            
+
+[1mCommands:(B[m                
+  cd                                 quit
+  cp                                 reboot
+  create                             reset-stats
+  delete                             restart
+  edit                               revoke
+  exit                               run
+  generate                           save
+  help                               send-mail
+  install                            show
+  list                               shutdown
+  load                               start
+  modify                             stop
+  mv                                 submit
+  publish                            uninstall
+  pwd                              
+
+[1mModules:(B[m
+[1m  analytics(B[m
+  global-settings                    report
+  gui-widget                         uri-type
+  predefined-report                
+
+[1m  analytics afm-sweeper(B[m  
+  report                             scheduled-report
+
+[1m  analytics apm-api-protection(B[m
+  report                             scheduled-report
+
+[1m  analytics application-security(B[m
+  report                             scheduled-report
+
+[1m  analytics application-security-anomalies(B[m
+  report                             scheduled-report
+
+[1m  analytics application-security-incidents(B[m
+  report                           
+
+[1m  analytics application-security-network(B[m
+  report                             scheduled-report
+
+[1m  analytics asm-bypass(B[m   
+  report                             scheduled-report
+
+[1m  analytics asm-cpu(B[m      
+  report                             scheduled-report
+
+[1m  analytics asm-enforced-entities(B[m
+  report                           
+
+[1m  analytics asm-learning-suggestions(B[m
+  report                           
+
+[1m  analytics asm-memory(B[m   
+  report                             scheduled-report
+
+[1m  analytics asm-policy-changes(B[m
+  report                           
+
+[1m  analytics asm-violation(B[m
+  report                             scheduled-report
+
+[1m  analytics bot-defense-event(B[m
+  report                           
+
+[1m  analytics cpu(B[m          
+  report                             scheduled-report
+
+[1m  analytics cpu-per-vip(B[m  
+  report                           
+
+[1m  analytics device-traffic(B[m
+  report                             scheduled-report
+
+[1m  analytics disk-info(B[m    
+  report                             scheduled-report
+
+[1m  analytics dns(B[m          
+  report                             scheduled-report
+
+[1m  analytics dns-cache-resolver(B[m
+  report                           
+
+[1m  analytics dns-dos(B[m      
+
+[1m  analytics dns-profile(B[m  
+  report                           
+
+[1m  analytics dns-protocol(B[m 
+
+[1m  analytics dns-rpz(B[m      
+  report                           
+
+[1m  analytics dos-l3(B[m       
+  report                             scheduled-report
+
+[1m  analytics dos-l7(B[m       
+  report                           
+
+[1m  analytics dos-vis-attacks(B[m
+  report                           
+
+[1m  analytics dos-vis-common(B[m
+  report                           
+
+[1m  analytics dos-vis-vips(B[m 
+  report                           
+
+[1m  analytics fw-nat(B[m       
+  report                             scheduled-report
+
+[1m  analytics gtm-wideip(B[m   
+  report                           
+
+[1m  analytics http(B[m         
+  report                             scheduled-report
+
+[1m  analytics ip-intelligence(B[m
+  report                             scheduled-report
+
+[1m  analytics ip-layer(B[m     
+  report                             scheduled-report
+
+[1m  analytics memory(B[m       
+  report                             scheduled-report
+
+[1m  analytics memory-per-process(B[m
+  report                           
+
+[1m  analytics network(B[m      
+  report                             stale-rules
+  scheduled-report                 
+
+[1m  analytics pool-traffic(B[m 
+  report                             scheduled-report
+
+[1m  analytics proc-cpu(B[m     
+  report                             scheduled-report
+
+[1m  analytics protocol-inspection(B[m
+  report                           
+
+[1m  analytics protocol-security(B[m
+  report                             scheduled-report
+
+[1m  analytics protocol-security-http(B[m
+  report                             scheduled-report
+
+[1m  analytics sip(B[m          
+  report                             scheduled-report
+
+[1m  analytics sip-dos(B[m      
+  report                             scheduled-report
+
+[1m  analytics ssl-orchestrator(B[m
+  report                             scheduled-report
+
+[1m  analytics swg(B[m          
+  report                             scheduled-report
+
+[1m  analytics swg-blocked(B[m  
+  report                             scheduled-report
+
+[1m  analytics system-monitor(B[m
+  report                           
+
+[1m  analytics tcp(B[m          
+  report                             scheduled-report
+
+[1m  analytics tcp-analytics(B[m
+  report                             scheduled-report
+
+[1m  analytics tmm-dns-zone(B[m 
+  report                           
+
+[1m  analytics traffic-classification(B[m
+  report                             scheduled-report
+
+[1m  analytics udp(B[m          
+  report                             scheduled-report
+
+[1m  analytics virtual(B[m      
+  report                             scheduled-report
+
+[1m  api-protection(B[m         
+  rate-limiting-config               response
+  rate-limiting-key                  server
+
+[1m  api-protection profile(B[m 
+  apiprotection                    
+
+[1m  apm(B[m                    
+  access-info                        log-setting
+  acl                                perrequest
+  apm-avr-config                     risk-class
+  application                        session
+  application-family                 swg-content-type
+  application-filter                 url-filter
+  license                          
+
+[1m  apm aaa(B[m                
+  active-directory                   oauth-provider
+  active-directory-trusted-domains   oauth-request
+  crldp                              oauth-server
+  endpoint-management-system         ocsp
+  f5-mfa-configuration               okta-connector
+  f5-service-connector               ping-access-properties-file
+  http                               radius
+  http-connector-request             rsa-aa
+  http-connector-transport           saml
+  kerberos                           saml-idp-automation
+  kerberos-keytab-file               saml-idp-connector
+  ldap                               securid
+  localdb                            tacacsplus
+  oam                              
+
+[1m  apm client(B[m             
+  image                            
+
+[1m  apm configuration(B[m      
+  captcha                          
+
+[1m  apm ephemeral-auth(B[m     
+  access-config                      ssh-security-config
+  auth-config                      
+
+[1m  apm ephemeral-auth ldap-auth(B[m
+  profile                          
+
+[1m  apm ephemeral-auth radius-auth(B[m
+  client                             profile
+
+[1m  apm epsec(B[m              
+  epsec-package                      software-status
+
+[1m  apm kerberos(B[m           
+  kerberos-auth                    
+
+[1m  apm ntlm(B[m               
+  machine-account                    ntlm-auth
+
+[1m  apm oauth(B[m              
+  db-instance                        oauth-client-app
+  jwk-config                         oauth-resource-server
+  jwt-config                         oauth-scope
+  jwt-provider-list                  purged-entries
+  oauth-claim                        token-details
+
+[1m  apm policy(B[m             
+  access-policy                      policy-item
+  customization-group                psync-data
+  customization-group-set            psync-data-file
+  customization-languages            psync-dynamic-resource
+  customization-source               psync-history
+  image-file                         psync-status
+
+[1m  apm policy agent(B[m       
+  aaa-active-directory               endpoint-windows-browser-cache-cleaner
+  aaa-client-cert                    endpoint-windows-check-file
+  aaa-crldp                          endpoint-windows-check-process
+  aaa-f5-mfa-device-registration     endpoint-windows-check-registry
+  aaa-f5-mfa-user-verification       endpoint-windows-info-os
+  aaa-http                           endpoint-windows-protected-workspace
+  aaa-identity                       event-wait
+  aaa-ldap                           external-logon-page
+  aaa-localdb                        http-connector
+  aaa-madm                           http-header-modify
+  aaa-managed-endpoint-notification  ip-geolocation-lookup
+  aaa-managed-endpoint-query         ip-reputation-lookup
+  aaa-managed-endpoint-status        irule-event
+  aaa-oauth                          kerberos
+  aaa-ocsp                           l7-protocol-lookup
+  aaa-radius                         localdb
+  aaa-rsa-aa                         logging
+  aaa-saml                           logon-page
+  aaa-securid                        message-box
+  acct-radius                        oam
+  acct-tacacsplus                    oauth-authz
+  api-authentication                 okta-mfa
+  api-rate-limiting                  otp-generate
+  api-server-selection               otp-verify
+  application-filter-lookup          protocol-lookup
+  application-lookup                 proxy-select
+  category-lookup                    request-classification
+  client-information                 resource-assign
+  decision-box                       response-analytics
+  dynamic-acl                        response-selection
+  email                              route-domain-selection
+  ending-abort                       server-cert-response-control
+  ending-allow                       server-cert-status
+  ending-deny                        service-connect
+  ending-redirect                    session-check
+  ending-reject                      ssl-bypass-lookup
+  endpoint-check-machine-cert        ssl-bypass-set
+  endpoint-check-software            ssl-check
+  endpoint-linux-check-file          sso-configuration-select
+  endpoint-linux-check-process       tacacsplus
+  endpoint-mac-check-file            url-filter-lookup
+  endpoint-mac-check-process         variable-assign
+  endpoint-machine-info            
+
+[1m  apm profile(B[m            
+  access                             oauthplugin
+  connectivity                       ping-access
+  eca                                remote-desktop
+  exchange                           vdi
+  oauth                              webssh
+
+[1m  apm report(B[m             
+  custom-report                      default-report
+  custom-report-field                favorite-report
+
+[1m  apm resource(B[m           
+  address-space                      portal-access
+  app-tunnel                         sandbox
+  client-rate-class                  webssh-resource
+  client-traffic-classifier          webtop
+  ipv6-leasepool                     webtop-link
+  leasepool                          webtop-section
+  network-access                   
+
+[1m  apm resource remote-desktop(B[m
+  citrix                             rdp
+  citrix-client-bundle               vmware-view
+
+[1m  apm saml(B[m               
+  artifact-resolution-service        auth-context-class-list
+  attribute-consuming-service      
+
+[1m  apm sso(B[m                
+  basic                              oauth-bearer
+  form-based                         saml
+  form-basedv2                       saml-resource
+  kerberos                           saml-sp-automation
+  ntlmv1                             saml-sp-connector
+  ntlmv2                           
+
+[1m  asm(B[m                    
+  device-sync                        predefined-policy
+  health-alerts                      response-code
+  http-method                        virtual
+  httpclass-asm                      webapp-language
+  policy                           
+
+[1m  auth(B[m                   
+  apm-auth                           radius
+  cert-ldap                          radius-server
+  ldap                               remote-role
+  login-failures                     remote-user
+  partition                          source
+  password                           tacacs
+  password-policy                    user
+
+[1m  cli(B[m                    
+  admin-partitions                   script
+  global-settings                    transaction
+  history                            version
+  preference                       
+
+[1m  cli alias(B[m              
+  private                            shared
+
+[1m  cm(B[m                     
+  add-to-trust                       sha1-fingerprint
+  cert                               sniff-updates
+  config-sync                        sync-status
+  device                             traffic-group
+  device-group                       trust-domain
+  failover-status                    watch-devicegroup-device
+  key                                watch-sys-device
+  remove-from-trust                  watch-trafficgroup-device
+
+[1m  gtm(B[m                    
+  big3d_install                      listener-doh-server
+  bigip_add                          path
+  datacenter                         persist
+  distributed-app                    prober-pool
+  gtm_add                            region
+  iquery                             rule
+  ldns                               server
+  link                               topology
+  listener                           traffic
+  listener-doh-proxy               
+
+[1m  gtm global-settings(B[m    
+  general                            metrics
+  load-balancing                     metrics-exclusions
+
+[1m  gtm monitor(B[m            
+  bigip                              pop3
+  bigip-link                         postgresql
+  external                           radius
+  firepass                           radius-accounting
+  ftp                                real-server
+  gateway-icmp                       scripted
+  gtp                                sip
+  http                               smtp
+  https                              snmp
+  imap                               snmp-link
+  ldap                               soap
+  mssql                              tcp
+  mysql                              tcp-half-open
+  nntp                               udp
+  none                               wap
+  oracle                             wmi
+
+[1m  gtm pool(B[m               
+  a                                  mx
+  aaaa                               naptr
+  cname                              srv
+
+[1m  gtm wideip(B[m             
+  a                                  mx
+  aaaa                               naptr
+  cname                              srv
+
+[1m  ltm(B[m                    
+  default-node-monitor               rule-profiler
+  eviction-policy                    snat
+  ifile                              snat-translation
+  nat                                snatpool
+  nat-stats                          traffic-class
+  node                               traffic-matching-criteria
+  policy                             urlcat-cloud-cache
+  policy-strategy                    urlcat-query
+  pool                               virtual
+  rule                               virtual-address
+
+[1m  ltm auth(B[m               
+  crldp-server                       radius-server
+  kerberos-delegation                ssl-cc-ldap
+  ldap                               ssl-crldp
+  ocsp-responder                     ssl-ocsp
+  profile                            tacacs
+  radius                           
+
+[1m  ltm cipher(B[m             
+  group                              rule
+
+[1m  ltm classification(B[m     
+  application                        signatures
+  category                           update-signatures
+  ce                                 updates
+  signature-definition               url-cat-policy
+  signature-update-schedule          url-category
+  signature-version                  urldb-feed-list
+
+[1m  ltm classification auto-update(B[m
+  settings                           status
+
+[1m  ltm classification stats(B[m
+  application                        urlcat-cloud
+  url-category                     
+
+[1m  ltm clientssl(B[m          
+  ocsp-stapling-responses          
+
+[1m  ltm clientssl-proxy(B[m    
+  cached-certs                     
+
+[1m  ltm data-group(B[m         
+  external                           internal
+
+[1m  ltm dns(B[m                
+  dns-express-db                     tsig-key
+  nameserver                         zone
+
+[1m  ltm dns analytics(B[m      
+  global-settings                  
+
+[1m  ltm dns cache(B[m          
+  global-settings                    transparent
+  resolver                           validating-resolver
+
+[1m  ltm dns cache records(B[m  
+  all                                nameserver
+  key                                rrset
+  msg                              
+
+[1m  ltm dns dnssec(B[m         
+  key                                zone
+
+[1m  ltm global-settings(B[m    
+  connection                         rule
+  general                            traffic-control
+
+[1m  ltm html-rule(B[m          
+  comment-raise-event                tag-raise-event
+  comment-remove                     tag-remove
+  tag-append-html                    tag-remove-attribute
+  tag-prepend-html                 
+
+[1m  ltm message-routing(B[m    
+
+[1m  ltm message-routing diameter(B[m
+  peer                               transport-config
+  route                            
+
+[1m  ltm message-routing diameter pmbr-stats(B[m
+  router                             session
+
+[1m  ltm message-routing diameter profile(B[m
+  router                             session
+
+[1m  ltm message-routing generic(B[m
+  peer                               router
+  protocol                           transport-config
+  route                            
+
+[1m  ltm message-routing generic pmbr-stats(B[m
+  protocol                           router
+
+[1m  ltm message-routing mqtt(B[m
+  peer                               transport-config
+  route                            
+
+[1m  ltm message-routing mqtt pmbr-stats(B[m
+  router                             session
+
+[1m  ltm message-routing mqtt profile(B[m
+  router                             session
+
+[1m  ltm message-routing sip(B[m
+  peer                               transport-config
+  route                            
+
+[1m  ltm message-routing sip pmbr-stats(B[m
+  router                             session
+
+[1m  ltm message-routing sip profile(B[m
+  router                             session
+
+[1m  ltm monitor(B[m            
+  diameter                           postgresql
+  dns                                radius
+  external                           radius-accounting
+  firepass                           real-server
+  ftp                                rpc
+  gateway-icmp                       sasp
+  http                               scripted
+  http2                              sip
+  https                              smb
+  icmp                               smtp
+  imap                               snmp-dca
+  inband                             snmp-dca-base
+  ldap                               soap
+  module-score                       tcp
+  mqtt                               tcp-echo
+  mssql                              tcp-half-open
+  mysql                              udp
+  nntp                               virtual-location
+  none                               wap
+  oracle                             wmi
+  pop3                             
+
+[1m  ltm persistence(B[m        
+  cookie                             persist-records
+  dest-addr                          sip
+  global-settings                    source-addr
+  hash                               ssl
+  host                               universal
+  msrdp                            
+
+[1m  ltm profile(B[m            
+  analytics                          ocsp-stapling-params
+  certificate-authority              one-connect
+  classification                     pcp
+  client-ldap                        pop3
+  client-ssl                         pptp
+  connector                          qoe
+  dhcpv4                             quic
+  dhcpv6                             radius
+  diameter                           ramcache
+  dns                                request-adapt
+  dns-logging                        request-log
+  doh-proxy                          response-adapt
+  doh-server                         rewrite
+  fasthttp                           rtsp
+  fastl4                             sctp
+  fix                                server-ldap
+  ftp                                server-ssl
+  georedundancy                      service
+  gtp                                sip
+  html                               smtp
+  http                               smtps
+  http-compression                   socks
+  http-proxy-connect                 splitsessionclient
+  http2                              splitsessionserver
+  http3                              statistics
+  httprouter                         stream
+  icap                               tcp
+  imap                               tcp-analytics
+  ipother                            tdr
+  ipsecalg                           tftp
+  mblb                               udp
+  mqtt                               wa-cache
+  mr-ratelimit                       web-acceleration
+  nat-stats                          web-security
+  netflow                            websocket
+  ntlm                               xml
+  ocsp                             
+
+[1m  ltm tacdb(B[m              
+  customdb                           customdb-file
+
+[1m  mgmt(B[m                   
+  cm                                 tm
+  shared                           
+
+[1m  net(B[m                    
+  address-list                       ndp
+  arp                                packet-filter
+  clone-stats                        packet-filter-trusted
+  cmetrics                           port-list
+  dag-globals                        port-mirror
+  dns-resolver                       route
+  dns-validating-resolver            route-domain
+  f5optics                           router-advertisement
+  ike-evt-stat                       rst-cause
+  ike-msg-stat                       self
+  interface                          self-allow
+  interface-cos                      service-policy
+  interface-ddm                      stp
+  ipsec-stat                         stp-globals
+  ipv6-subscriber-prefix             timer-policy
+  lacp-globals                       trunk
+  lldp-globals                       vlan
+  lldp-neighbors                     vlan-allowed
+  mroute                             vlan-group
+  multicast-globals                  wccp
+
+[1m  net bwc(B[m                
+  policy                             priority-group
+
+[1m  net cos(B[m                
+  global-settings                    map-dscp
+  map-8021p                          traffic-priority
+
+[1m  net fdb(B[m                
+  tunnel                             vlan
+
+[1m  net ipsec(B[m              
+  ike-daemon                         ipsec-sa
+  ike-peer                           manual-security-association
+  ike-sa                             traffic-selector
+  ipsec-policy                     
+
+[1m  net packet-tester(B[m      
+  security                         
+
+[1m  net rate-shaping(B[m       
+  class                              queue
+  color-policer                      shaping-policy
+  drop-policy                      
+
+[1m  net routing(B[m            
+  access-list                        community-list
+  all                                debug
+  as-path                            extcommunity-list
+  bfd                                prefix-list
+  bgp                                route-map
+
+[1m  net routing profile(B[m    
+  bgp                              
+
+[1m  net sfc(B[m                
+  chain                              sf
+  hop                              
+
+[1m  net tunnels(B[m            
+  endpoint                           lw4o6
+  etherip                            map
+  fec                                ppp
+  fec-stat                           tcp-forward
+  geneve                             tunnel
+  gre                                v6rd
+  ipip                               vxlan
+  ipsec                              wccp
+
+[1m  pem(B[m                    
+  sessiondb                        
+
+[1m  pem global-settings(B[m    
+  analytics                          policy
+  gx                                 quota-mgmt
+  hsl-flow                           session-mgmt-attributes
+  hsl-report                         subscriber-activity-log
+  insert-content                   
+
+[1m  pem profile(B[m            
+  diameter-endpoint                  subscriber-mgmt
+  radius-aaa                       
+
+[1m  pem protocol(B[m           
+  diameter-avp                       radius-avp
+
+[1m  pem protocol profile(B[m   
+  diameter                           radius
+
+[1m  pem quota-mgmt(B[m         
+  rating-group                     
+
+[1m  pem reporting(B[m          
+  format-script                    
+
+[1m  pem stats(B[m              
+  action                             multiple-ip
+  dtos                               persistence
+  gx                                 radius
+  gy                                 sd
+  hsl                                subscriber
+  hudnode-opt                        tethering
+
+[1m  saas(B[m                   
+
+[1m  saas ap-ai(B[m             
+  profile                          
+
+[1m  saas ati(B[m               
+  profile                          
+
+[1m  saas bd(B[m                
+  profile                          
+
+[1m  saas csd(B[m               
+  profile                          
+
+[1m  security(B[m               
+  protected-zone                     zone
+
+[1m  security analytics(B[m     
+  settings                         
+
+[1m  security blacklist-publisher(B[m
+  all-blacklist-publisher            category
+  blacklist-publisher-stats          profile
+  by-addr                          
+
+[1m  security bot-defense(B[m   
+  anomaly                            profile
+  anomaly-category                   signature
+  asm-profile                        signature-category
+  class                              template
+  micro-service                    
+
+[1m  security cloud-services(B[m
+  application                        connector
+  application-stats                  endpoint
+  asm-cloud-services                 endpoint-stats
+  cmd                              
+
+[1m  security datasync(B[m      
+  background-tasks                   local-profile
+
+[1m  security debug(B[m         
+  drop-redirect-stats                register
+  matcher                            shared-ip-table
+  packet-tester                    
+
+[1m  security device(B[m        
+  device-context                   
+
+[1m  security device-id(B[m     
+  attribute                        
+
+[1m  security dns(B[m           
+  profile                          
+
+[1m  security dos(B[m           
+  autodos-file-object                l4bdos-context-info
+  behavioral-signature               l4bdos-file-object
+  bot-signature                      l4bdos-histogram-info
+  bot-signature-category             network-whitelist
+  device-config                      neuron-stats
+  dns-nxdomain-stat                  profile
+  dos-signature                      spva-stats
+  dynamic-signatures                 stress-stats
+  ip-uncommon-protolist              udp-portlist
+  ipv6-ext-hdr                       virtual
+
+[1m  security dos auto-thresholds(B[m
+  heavy-urls                         top-source-ips
+  stress-based                       top-urls
+  top-device-ids                     tps-based
+  top-geolocations                 
+
+[1m  security firewall(B[m      
+  address-list                       on-demand-compilation
+  config-change-log                  on-demand-rule-deploy
+  container-stat                     policy
+  context-stat                       port-list
+  current-state                      port-misuse-policy
+  fqdn-entity                        rule-list
+  fqdn-info                          rule-stat
+  global-fqdn-policy                 schedule
+  global-rules                       user-domain
+  ipi-category-info                  user-group-entity
+  management-ip-rules                user-list
+  matching-rule                      uuid-default-autogenerate
+
+[1m  security flowspec-route-injector(B[m
+  flowspec-advertised-route-info     profile
+
+[1m  security http(B[m          
+  file-type                          profile
+  mandatory-header                 
+
+[1m  security ip-intelligence(B[m
+  blacklist-category                 fqdn-info
+  category                           global-policy
+  feed-list                          info
+  fqdn-entity                        policy
+
+[1m  security log(B[m           
+  nat-end-inbound-storage-field      network-storage-field
+  nat-end-outbound-storage-field     profile
+  nat-errors-storage-field           protocol-dns-storage-field
+  nat-quota-ex-storage-field         protocol-sip-storage-field
+  nat-start-inb-storage-field        remote-format
+  nat-start-outb-storage-field       storage-field
+
+[1m  security malicious-sources(B[m
+  device-ids                         ip-addresses
+
+[1m  security nat(B[m           
+  container-stat                     policy
+  destination-translation            source-translation
+
+[1m  security packet-filter(B[m 
+  default-rules                      rule-stat
+  policy                           
+
+[1m  security presentation(B[m  
+
+[1m  security presentation tmui(B[m
+  attacks                            profile-list
+  auto-discovered-protected-object   signature-details
+  netflow-details                    signature-list
+  netflow-list                       virtual-details
+  profile-details                    virtual-list
+
+[1m  security protected-servers(B[m
+  netflow-protected-server           traffic-matching-criteria
+
+[1m  security protected-servers auto-discovery(B[m
+  global-relearn                     virtual-relearn
+  protected-server                 
+
+[1m  security protocol-inspection(B[m
+  common-config                      profile-status
+  common-config-compliance-meta      service
+  common-config-service-meta         service-config-enums
+  compliance                         service-config-map
+  compliance-enums                   service-config-objects
+  compliance-map                     signature
+  compliance-objects                 staging
+  learning-stats                     system
+  learning-suggestions               updates
+  profile                            virtual-servers
+
+[1m  security protocol-inspection auto-update(B[m
+  settings                           status
+
+[1m  security scrubber(B[m      
+  dwbl-scrubber-category-stats       profile
+  dwbl-scrubber-stat                 unredirect
+
+[1m  security shared-objects(B[m
+  address-list                       port-list
+  global-fqdn-policy               
+
+[1m  security ssh(B[m           
+  profile                            sshplugin-stats
+
+[1m  subscriber-management(B[m  
+  global-stats                     
+
+[1m  subscriber-management global-settings(B[m
+  session-mgmt-attributes          
+
+[1m  sys(B[m                    
+  air-filter-reset                   ip-stat
+  aom                                iprep-status
+  autoscale-group                    license
+  availability                       log
+  clock                              log-rotate
+  cluster                            mac-address
+  compatibility-level                management-dhcp
+  config                             management-ip
+  config-diff                        management-ovsdb
+  connection                         management-proxy-config
+  console                            management-route
+  core                               mcp-state
+  cpu                                memory
+  daemon-ha                          ntp
+  datastor                           outbound-smtp
+  db                                 pptp-call-info
+  dns                                proc-info
+  failover                           provision
+  feature-module                     pva-traffic
+  fix-connection                     ready
+  folder                             scriptd
+  geoip                              service
+  global-settings                    smtp-server
+  ha-group                           snmp
+  ha-mirror                          sshd
+  ha-status                          state-mirroring
+  hardware                           sync-sys-files
+  host-info                          syslog
+  httpd                              telemd
+  hypervisor-info                    tmm-info
+  iapp-restricted-key                tmm-traffic
+  icmp-stat                          traffic
+  icontrol-soap                      ucs
+  internal-proxy                     version
+  ip-address                       
+
+[1m  sys alert(B[m              
+  lcd                              
+
+[1m  sys appiq(B[m              
+  config                           
+
+[1m  sys application(B[m        
+  apl-script                         service
+  custom-stat                        template
+
+[1m  sys crypto(B[m             
+  acceleration-strategy              csr
+  allow-key-export                   encrypted-attributes
+  ca-bundle-manager                  key
+  cert                               master-key
+  cert-order-manager                 nethsm-test
+  check-cert                         pkcs12
+  client                             server
+  crl                              
+
+[1m  sys crypto cert-validation-response(B[m
+  ocsp                             
+
+[1m  sys crypto cert-validator(B[m
+  crl                                ocsp
+
+[1m  sys crypto fips(B[m        
+  external-hsm                       nethsm-partition
+  key                              
+
+[1m  sys daemon-log-settings(B[m
+  clusterd                           lind
+  csyncd                             mcpd
+  icr-eventd                         tmm
+  icrd                             
+
+[1m  sys diags(B[m              
+  ihealth                            ihealth-result
+  ihealth-request                  
+
+[1m  sys disk(B[m               
+  application-volume                 logical-disk
+  directory                        
+
+[1m  sys dynad(B[m              
+  instrumentation                    settings
+  key                                status
+  rpm                              
+
+[1m  sys ecm(B[m                
+  cloud-provider                     register
+  config                           
+
+[1m  sys file(B[m               
+  apache-ssl-cert                    lwtunneltbl
+  browser-capabilities-db            ssl-cert
+  dashboard-viewset                  ssl-crl
+  data-group                         ssl-csr
+  device-capabilities-db             ssl-key
+  external-monitor                   system-ssl-cert
+  ifile                              system-ssl-key
+
+[1m  sys fpga(B[m               
+  firmware-config                    turboflex-profile
+  info                             
+
+[1m  sys icall(B[m              
+  event                              publisher
+  istats-trigger                     script
+
+[1m  sys icall handler(B[m      
+  periodic                           triggered
+  perpetual                        
+
+[1m  sys integrity(B[m          
+  status-check                     
+
+[1m  sys ipfix(B[m              
+  destination                        irules
+  element                          
+
+[1m  sys log-config(B[m         
+  filter                             publisher
+
+[1m  sys log-config destination(B[m
+  alertd                             management-port
+  arcsight                           remote-high-speed-log
+  ipfix                              remote-syslog
+  local-database                     splunk
+  local-syslog                     
+
+[1m  sys nethsm(B[m             
+  async-queue-stat                   sync-queue-stat
+  pkcs11d-stat                     
+
+[1m  sys performance(B[m        
+  all-stats                          gtm
+  connections                        ramcache
+  dnsexpress                         system
+  dnssec                             throughput
+
+[1m  sys pfman(B[m              
+  consumer                           device
+
+[1m  sys raid(B[m               
+  array                              disk
+  bay                              
+
+[1m  sys sflow(B[m              
+  receiver                         
+
+[1m  sys sflow data-source(B[m  
+  http                               system
+  interface                          vlan
+
+[1m  sys sflow global-settings(B[m
+  http                               system
+  interface                          vlan
+
+[1m  sys software(B[m           
+  block-device-hotfix                status
+  block-device-image                 update
+  hotfix                             update-status
+  image                              volume
+  signature                        
+
+[1m  sys turboflex(B[m          
+  features                           warning
+  profile-config                   
+
+[1m  sys turboflex profile(B[m  
+  all                                feature
+
+[1m  sys url-db(B[m             
+  download-result                    url-category
+  download-schedule                
+
+[1m  util(B[m                   
+  admdb                              platform_diag
+  bash                               qkcloud
+  ccmode                             qkview
+  clientssl-ciphers                  racoonctl
+  diadb                              scp
+  dig                                serverssl-ciphers
+  dnat                               sftp
+  domain-tool                        sipdb
+  establish-adfs-trust               ssh-keyswap
+  finalize-custom-ami                ssldump
+  fips-card-sync                     sys-icheck
+  fips-util                          tcpdump
+  gencert                            telnet
+  geodb                              test-monitor
+  geoutil                            tracepath
+  get-ccn-dossier                    tracepath6
+  get-dossier                        traceroute
+  ihealth                            traceroute6
+  imish                              unix-ls
+  ipsecalgdb                         unix-mv
+  lsndb                              unix-rm
+  netstat                            updatecheck
+  ping                               vconsole
+  ping6                              verify-encryption
+  platform_check                     zebos
+
+[1m  wom(B[m                    
+
+[1m  wom profile(B[m            
+  isession                         
+
